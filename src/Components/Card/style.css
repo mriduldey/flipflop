@@ -1,0 +1,64 @@
+.scene {
+  height: 60px;
+  width: 50px;
+  perspective: 200px;
+  border: 2px solid #a4c3b2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background-color: white;
+  margin: 10px;
+}
+
+.scene.scene-error {
+  border: 2px solid red;
+  animation-name: error-card;
+  animation-duration: 200ms;
+  animation-iteration-count: 4;
+  animation-direction: alternate;
+}
+
+@keyframes error-card {
+  from {
+    border: 2px solid #a4c3b2;
+  }
+  to {
+    border: 2px solid red;
+  }
+}
+
+.card {
+  height: 55px;
+  width: 45px;
+  position: relative;
+  transition: transform 800ms;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.card.isClicked {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  color: white;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 55px;
+  text-align: center;
+  backface-visibility: hidden;
+}
+
+.face-front {
+  background-color: #4c5f57;
+}
+
+.face-back {
+  background-color: #149b5f;
+  transform: rotateY(180deg);
+}
