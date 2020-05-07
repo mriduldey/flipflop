@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./Card/Card";
 
 const CardDeck = (props) => {
+  const { rowNumber, colNumber } = props;
   const createCard = (i) => {
     const { viewFaces } = props;
 
@@ -21,7 +22,6 @@ const CardDeck = (props) => {
 
   const createCardDeckRow = (i) => {
     const cardDeckRow = [];
-    const { colNumber } = props;
     for (let j = 0; j < colNumber; j++) {
       cardDeckRow.push(createCard(i + j));
     }
@@ -31,7 +31,6 @@ const CardDeck = (props) => {
 
   const createCardDeck = () => {
     const cardDeckComponent = [];
-    const { rowNumber, colNumber } = props;
     for (let i = 0; i < rowNumber; i++) {
       cardDeckComponent.push(
         <div className="card-deck-row" key={`row-${i}`}>
@@ -43,7 +42,11 @@ const CardDeck = (props) => {
     return cardDeckComponent;
   };
 
-  return <div className="card-deck card-deck-4">{createCardDeck()}</div>;
+  return (
+    <div className={`card-deck card-deck-${rowNumber}-${colNumber}`}>
+      {createCardDeck()}
+    </div>
+  );
 };
 
 export default CardDeck;

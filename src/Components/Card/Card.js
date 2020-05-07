@@ -18,7 +18,7 @@ const Card = (props) => {
       <div className={`card ${isClicked()}`} onClick={props.onClick}>
         <div className="card-face face-front">{face.dataItem}</div>
         <div className="card-face face-back">
-          <img width="45px" height="55px" src={batman} alt="Front" />
+          <img width="47px" height="57px" src={batman} alt="Front" />
         </div>
       </div>
     </div>

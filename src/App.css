@@ -68,11 +68,7 @@ body {
   border: 5px solid #a4c3b2;
   border-radius: 6px;
   margin: auto;
-}
-
-.card-deck-4 {
-  width: 350px;
-  height: 390px;
+  padding: 20px;
 }
 
 .card-deck-row {

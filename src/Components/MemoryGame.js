@@ -1,5 +1,6 @@
 import React from "react";
 import CardDeck from "./CardDeck";
+import Dropdown from "./Dropdown";
 
 const actualCardFaces = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -65,22 +66,8 @@ class MemoryGame extends React.Component {
     console.log("current status: ", gameStatus);
     console.log("previous status: ", prevGameStatus);
 
-    if (gameStatus === GAME_PRE_START) {
-      let viewFaces = JSON.parse(JSON.stringify(this.state.viewFaces));
-
-      viewFaces.forEach((viewFace) => {
-        viewFace.isFlipped = false;
-      });
-
-      setTimeout(() =>
-        this.setState(() => ({
-          viewFaces: viewFaces,
-          gameStatus: GAME_PRE_START,
-        }))
-      );
-    }
-
     if (gameStatus === GAME_START_UNFLIPPED) {
+      console.log("game status: ", GAME_START_UNFLIPPED);
       let viewFaces = JSON.parse(JSON.stringify(this.state.viewFaces));
 
       viewFaces.forEach((viewFace) => {
@@ -97,6 +84,7 @@ class MemoryGame extends React.Component {
       );
     }
 
+    // end game when life ends
     const { life } = this.state;
 
     if (life === 0 && gameStatus === GAME_MIDDLE_FLIPPED) {
@@ -191,8 +179,7 @@ class MemoryGame extends React.Component {
       : "Game over! play again?";
   };
 
-  renderLifeList = () => {
-    const { life } = this.state;
+  renderLifeList = (life) => {
     let lifeArray = [];
     for (let i = 0; i < life; i += 1) {
       lifeArray.push(
@@ -205,6 +192,55 @@ class MemoryGame extends React.Component {
     return lifeArray;
   };
 
+  handleDropdown = (e) => {
+    const { rowNumber, colNumber, gameStatus } = this.state;
+
+    if (gameStatus === GAME_PRE_START || gameStatus === GAME_END) {
+      const value = e.target.value;
+
+      const targetName = e.target.getAttribute("name");
+      const isRowChange = targetName === "row-options";
+
+      const newColNumber = isRowChange ? colNumber : value;
+      const newRowNumber = isRowChange ? value : rowNumber;
+
+      const halfNumberCards = (newColNumber * newRowNumber) / 2;
+
+      console.log("target name", targetName);
+      console.log("half number cards: ", halfNumberCards);
+
+      let actualCardFaces = [];
+      for (let i = 0; i < halfNumberCards; i++) {
+        actualCardFaces.push(i);
+      }
+
+      let viewFaces = actualCardFaces.concat(actualCardFaces);
+
+      viewFaces = viewFaces.map((element, index) => {
+        return {
+          id: index,
+          dataItem: element,
+          isFlipped: true,
+        };
+      });
+
+      const shuffle = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      };
+
+      shuffle(viewFaces);
+      console.log(viewFaces);
+      this.setState(() => ({
+        viewFaces: viewFaces,
+        rowNumber: newRowNumber,
+        colNumber: newColNumber,
+      }));
+    }
+  };
+
   render() {
     const {
       rowNumber,
@@ -213,20 +249,43 @@ class MemoryGame extends React.Component {
       error,
       pairMatched,
       clickedCardIndex,
+      life,
     } = this.state;
-
+    console.log("rendering");
     return (
       <div className="memory-game-wrapper">
         <div className="status">
           <div className="score">
-            <ul className="life">{this.renderLifeList()}</ul>
-            <p className="point">Point: {pairMatched * 10}</p>
+            <ul className="life">{this.renderLifeList(life)}</ul>
+            <p className="point">
+              Point:{" "}
+              {
+                pairMatched * 10 - (5 - life) * 5
+                /*10 points for each matching pait, -5 points for each error*/
+              }
+            </p>
           </div>
           <div className="game-control">
             <p>{this.gameStatusInfo()}</p>
             <button type="submit" onClick={() => this.handleGameControl()}>
               <i className="fas fa-play"></i>
             </button>
+          </div>
+          <div className="board-control">
+            <Dropdown
+              label="Pick row number: "
+              name="row-options"
+              options={[4, 5, 6]}
+              value={rowNumber}
+              onChange={(e) => this.handleDropdown(e)}
+            />
+            <Dropdown
+              label="Pick column number: "
+              name="col-options"
+              options={[4, 5, 6]}
+              value={colNumber}
+              onChange={(e) => this.handleDropdown(e)}
+            />
           </div>
         </div>
         <div className="card-deck-wrapper">

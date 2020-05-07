@@ -1,6 +1,6 @@
 .scene {
-  height: 60px;
-  width: 50px;
+  height: 62px;
+  width: 52px;
   perspective: 200px;
   border: 2px solid #a4c3b2;
   display: flex;
@@ -29,8 +29,8 @@
 }
 
 .card {
-  height: 55px;
-  width: 45px;
+  height: 57px;
+  width: 47px;
   position: relative;
   transition: transform 800ms;
   transform-style: preserve-3d;
