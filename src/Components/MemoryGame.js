@@ -25,6 +25,8 @@ shuffle(viewFaces);
 
 const defaultRowNumber = 4;
 const defaultColNumber = 4;
+const cardNumberOptions = [3, 4, 5, 6];
+const defaultTimeRemaining = 120;
 
 const GAME_PRE_START = "GAME_PRE_START";
 const GAME_START_UNFLIPPED = "GAME_START_UNFLIPPED";
@@ -44,6 +46,9 @@ class MemoryGame extends React.Component {
       error: false,
       life: 5,
       gameStatus: GAME_PRE_START,
+      boardRowOptions: cardNumberOptions,
+      boardColOptions: cardNumberOptions,
+      timeRemaining: defaultTimeRemaining,
     };
   }
 
@@ -62,7 +67,8 @@ class MemoryGame extends React.Component {
 
     //controlling game life cycle.........................................
     const { gameStatus } = this.state;
-    const prevGameStatus = prevState.gameStatus;
+    const { gameStatus: prevGameStatus } = prevState;
+
     console.log("current status: ", gameStatus);
     console.log("previous status: ", prevGameStatus);
 
@@ -80,17 +86,44 @@ class MemoryGame extends React.Component {
             viewFaces: viewFaces,
             gameStatus: GAME_MIDDLE_FLIPPED,
           })),
-        10000
+        2000
       );
     }
 
     // end game when life ends
-    const { life } = this.state;
 
-    if (life === 0 && gameStatus === GAME_MIDDLE_FLIPPED) {
-      this.setState(() => ({ gameStatus: GAME_END }));
+    if (gameStatus === GAME_MIDDLE_FLIPPED) {
+      const { life, timeRemaining } = this.state;
+      const { timeRemaining: prevTimeRemaining } = prevState;
+      console.log(
+        "previous time remaining................:   ",
+        prevTimeRemaining
+      );
+      console.log("current time remaining................:   ", timeRemaining);
+      if (timeRemaining !== 0) {
+        if (prevGameStatus === GAME_START_UNFLIPPED) {
+          this.timeID = setInterval(() => this.handleTime(), 1000);
+        }
+      } else {
+        clearInterval(this.timeID);
+        this.setState(() => ({
+          gameStatus: GAME_END,
+        }));
+      }
+
+      if (life === 0) {
+        this.setState(() => ({ gameStatus: GAME_END }));
+      }
     }
   }
+
+  handleTime = () => {
+    const { timeRemaining } = this.state;
+    console.log("Inside timebar function");
+    this.setState(() => ({
+      timeRemaining: timeRemaining - 1,
+    }));
+  };
 
   handleClick = (i) => {
     const cardFaces = JSON.parse(JSON.stringify(this.state.viewFaces));
@@ -164,6 +197,7 @@ class MemoryGame extends React.Component {
         clickedCardIndex: undefined,
         error: false,
         life: 5,
+        timeRemaining: defaultTimeRemaining,
       }));
     }
   };
@@ -193,22 +227,25 @@ class MemoryGame extends React.Component {
   };
 
   handleDropdown = (e) => {
-    const { rowNumber, colNumber, gameStatus } = this.state;
+    const {
+      rowNumber,
+      colNumber,
+      gameStatus,
+      boardColOptions,
+      boardRowOptions,
+    } = this.state;
 
     if (gameStatus === GAME_PRE_START || gameStatus === GAME_END) {
       const value = e.target.value;
 
       const targetName = e.target.getAttribute("name");
+
       const isRowChange = targetName === "row-options";
 
       const newColNumber = isRowChange ? colNumber : value;
       const newRowNumber = isRowChange ? value : rowNumber;
 
       const halfNumberCards = (newColNumber * newRowNumber) / 2;
-
-      console.log("target name", targetName);
-      console.log("half number cards: ", halfNumberCards);
-
       let actualCardFaces = [];
       for (let i = 0; i < halfNumberCards; i++) {
         actualCardFaces.push(i);
@@ -232,11 +269,25 @@ class MemoryGame extends React.Component {
       };
 
       shuffle(viewFaces);
-      console.log(viewFaces);
+
+      let newBoardColOptions = isRowChange
+        ? cardNumberOptions.filter((col) => {
+            return value % 2 === 0 ? true : col % 2 === 0 ? true : false;
+          })
+        : boardColOptions;
+
+      let newBoardRowOptions = !isRowChange
+        ? cardNumberOptions.filter((col) => {
+            return value % 2 === 0 ? true : col % 2 === 0 ? true : false;
+          })
+        : boardRowOptions;
+
       this.setState(() => ({
         viewFaces: viewFaces,
         rowNumber: newRowNumber,
         colNumber: newColNumber,
+        boardColOptions: newBoardColOptions,
+        boardRowOptions: newBoardRowOptions,
       }));
     }
   };
@@ -250,6 +301,9 @@ class MemoryGame extends React.Component {
       pairMatched,
       clickedCardIndex,
       life,
+      boardColOptions,
+      boardRowOptions,
+      timeRemaining,
     } = this.state;
     console.log("rendering");
     return (
@@ -275,20 +329,24 @@ class MemoryGame extends React.Component {
             <Dropdown
               label="Pick row number: "
               name="row-options"
-              options={[4, 5, 6]}
+              options={boardRowOptions}
               value={rowNumber}
               onChange={(e) => this.handleDropdown(e)}
             />
             <Dropdown
               label="Pick column number: "
               name="col-options"
-              options={[4, 5, 6]}
+              options={boardColOptions}
               value={colNumber}
               onChange={(e) => this.handleDropdown(e)}
             />
           </div>
         </div>
         <div className="card-deck-wrapper">
+          <div className="time-bar">
+            <label for="timebar">Time remaining:</label>
+            <progress id="timebar" value={timeRemaining} max="120"></progress>
+          </div>
           <CardDeck
             rowNumber={rowNumber}
             colNumber={colNumber}
