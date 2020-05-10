@@ -90,7 +90,7 @@ class MemoryGame extends React.Component {
       );
     }
 
-    // end game when life ends
+    // end game when life ends and starting timebar when game starts
 
     if (gameStatus === GAME_MIDDLE_FLIPPED) {
       const { life, timeRemaining } = this.state;
@@ -112,9 +112,12 @@ class MemoryGame extends React.Component {
       }
 
       if (life === 0) {
+        clearInterval(this.timeID);
         this.setState(() => ({ gameStatus: GAME_END }));
       }
     }
+
+    // ...........................................................................
   }
 
   handleTime = () => {
@@ -304,6 +307,7 @@ class MemoryGame extends React.Component {
       boardColOptions,
       boardRowOptions,
       timeRemaining,
+      gameStatus,
     } = this.state;
     console.log("rendering");
     return (
@@ -344,7 +348,9 @@ class MemoryGame extends React.Component {
         </div>
         <div className="card-deck-wrapper">
           <div className="time-bar">
-            <label for="timebar">Time remaining:</label>
+            <label for="timebar">{`${
+              gameStatus === GAME_MIDDLE_FLIPPED ? `${timeRemaining}s` : ""
+            }`}</label>
             <progress id="timebar" value={timeRemaining} max="120"></progress>
           </div>
           <CardDeck
