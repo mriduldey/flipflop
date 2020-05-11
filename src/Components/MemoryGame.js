@@ -49,6 +49,7 @@ class MemoryGame extends React.Component {
       boardRowOptions: cardNumberOptions,
       boardColOptions: cardNumberOptions,
       timeRemaining: defaultTimeRemaining,
+      isSettingsOpened: false,
     };
   }
 
@@ -86,7 +87,7 @@ class MemoryGame extends React.Component {
             viewFaces: viewFaces,
             gameStatus: GAME_MIDDLE_FLIPPED,
           })),
-        2000
+        1000
       );
     }
 
@@ -118,6 +119,10 @@ class MemoryGame extends React.Component {
     }
 
     // ...........................................................................
+
+    if (gameStatus === GAME_END) {
+      clearInterval(this.timeID);
+    }
   }
 
   handleTime = () => {
@@ -295,6 +300,22 @@ class MemoryGame extends React.Component {
     }
   };
 
+  handleSettings = () => {
+    const { isSettingsOpened } = this.state;
+    this.setState(() => ({ isSettingsOpened: !isSettingsOpened }));
+  };
+
+  handleTimeIcon = () => {
+    const { gameStatus } = this.state;
+    const iconClass =
+      gameStatus === GAME_PRE_START || gameStatus === GAME_START_UNFLIPPED
+        ? "fas fa-hourglass-start"
+        : gameStatus === GAME_MIDDLE_FLIPPED
+        ? "far fa-hourglass game-started"
+        : "fas fa-hourglass-end";
+    return iconClass;
+  };
+
   render() {
     const {
       rowNumber,
@@ -308,6 +329,7 @@ class MemoryGame extends React.Component {
       boardRowOptions,
       timeRemaining,
       gameStatus,
+      isSettingsOpened,
     } = this.state;
     console.log("rendering");
     return (
@@ -315,13 +337,6 @@ class MemoryGame extends React.Component {
         <div className="status">
           <div className="score">
             <ul className="life">{this.renderLifeList(life)}</ul>
-            <p className="point">
-              Point:{" "}
-              {
-                pairMatched * 10 - (5 - life) * 5
-                /*10 points for each matching pait, -5 points for each error*/
-              }
-            </p>
           </div>
           <div className="game-control">
             <p>{this.gameStatusInfo()}</p>
@@ -329,7 +344,22 @@ class MemoryGame extends React.Component {
               <i className="fas fa-play"></i>
             </button>
           </div>
-          <div className="board-control">
+
+          <p className="point">
+            Point:{" "}
+            {
+              pairMatched * 10 - (5 - life) * 5
+              /*10 points for each matching pait, -5 points for each error*/
+            }
+          </p>
+          <div className="settings" onClick={() => this.handleSettings()}>
+            <i className="fas fa-cog"></i>
+          </div>
+          <div
+            className={`board-control ${
+              isSettingsOpened ? "settings-opened" : "settings-closed"
+            }`}
+          >
             <Dropdown
               label="Pick row number: "
               name="row-options"
@@ -348,10 +378,16 @@ class MemoryGame extends React.Component {
         </div>
         <div className="card-deck-wrapper">
           <div className="time-bar">
-            <label for="timebar">{`${
+            <p for="timebar">{`${
               gameStatus === GAME_MIDDLE_FLIPPED ? `${timeRemaining}s` : ""
-            }`}</label>
-            <progress id="timebar" value={timeRemaining} max="120"></progress>
+            }`}</p>
+            <i class={`${this.handleTimeIcon()}`}></i>
+            <progress
+              id="timebar"
+              className={`${timeRemaining === 120 ? "time-full" : ""}`}
+              value={timeRemaining}
+              max="120"
+            ></progress>
           </div>
           <CardDeck
             rowNumber={rowNumber}

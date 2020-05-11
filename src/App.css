@@ -11,6 +11,7 @@ body {
 }
 
 .status {
+  position: relative;
   height: calc(100vh - 40px);
   width: 300px;
   padding: 20px;
@@ -24,14 +25,14 @@ body {
 }
 
 .status .score {
-  height: 100px;
+  height: 40px;
   width: 100%;
-  border: 1px solid #6b9080;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
 }
 
 .life {
   list-style: none;
+  text-align: center;
   margin: 0px;
   padding: 0px;
   height: 50px;
@@ -42,14 +43,80 @@ body {
   padding: 5px;
 }
 
-.life li svg {
+.life li i {
   font-size: 30px;
 }
 
 .status .game-control {
   height: 150px;
   width: 100%;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.game-control p {
+  margin: auto;
+}
+
+.game-control button {
+  padding: 10px;
+  border-radius: 6px;
+  border: 2px solid #6b9080;
+  margin-top: 10px;
+  background-color: #eaf4f4;
+}
+
+.game-control button:focus {
+  outline: 0px;
+}
+
+.game-control button i {
+  font-size: 90px;
+  color: #6b9080;
+}
+
+.game-control button:focus i {
+  font-size: 85px;
+}
+
+.point {
+  text-align: center;
+}
+
+.settings {
+  display: inline-block;
+  position: absolute;
   border: 1px solid #6b9080;
+  border-radius: 50%;
+  bottom: 10px;
+  left: 10px;
+  padding: 4px 4px 2px;
+  color: #6b9080;
+}
+
+.settings:hover {
+  background-color: #eaf4f480;
+}
+
+.settings i {
+  font-size: 25px;
+}
+
+.board-control {
+  padding: 10px;
+  width: fit-content;
+  height: 100px;
+  border-radius: 6px;
+  border: 2px solid #6b9080;
+}
+
+.settings-opened {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-closed {
+  display: none;
 }
 
 .card-deck-wrapper {
@@ -59,6 +126,67 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.time-bar {
+  height: 30px;
+  position: relative;
+}
+
+.time-bar p {
+  margin: auto;
+  position: absolute;
+  left: 25px;
+}
+
+.time-bar i {
+  margin-right: 10px;
+  transform: translateY(3px);
+  color: #6b9080;
+}
+
+.time-bar i.game-started {
+  animation: rotate-icon 3s linear 0s infinite normal;
+}
+
+@keyframes rotate-icon {
+  from {
+    transform: rotate(0deg) translateY(3px);
+
+    transform-origin: 50% calc(50% + 3px);
+  }
+  to {
+    transform: rotate(360deg) translateY(3px);
+    transform-origin: 50% calc(50% + 3px);
+  }
+}
+
+progress {
+  -webkit-appearance: none;
+  appearance: none;
+
+  height: 16px;
+  width: 800px;
+  margin-top: 25px;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 1px;
+  border: 2px solid #a4c3b2;
+}
+
+progress::-webkit-progress-value {
+  /* border-radius: 6px; */
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  height: 10px;
+  background-color: #6b9080;
+}
+
+progress.time-full::-webkit-progress-value {
+  border-radius: 6px;
 }
 
 .card-deck {
