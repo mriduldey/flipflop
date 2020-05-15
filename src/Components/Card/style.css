@@ -2,30 +2,11 @@
   height: 62px;
   width: 52px;
   perspective: 200px;
-  border: 2px solid #a4c3b2;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 6px;
-  background-color: white;
   margin: 10px;
-}
-
-.scene.scene-error {
-  border: 2px solid red;
-  animation-name: error-card;
-  animation-duration: 200ms;
-  animation-iteration-count: 4;
-  animation-direction: alternate;
-}
-
-@keyframes error-card {
-  from {
-    border: 2px solid #a4c3b2;
-  }
-  to {
-    border: 2px solid red;
-  }
 }
 
 .card {
@@ -45,20 +26,19 @@
   height: 100%;
   width: 100%;
   position: absolute;
-  color: white;
   border-radius: 6px;
   font-size: 15px;
   font-weight: 600;
   line-height: 55px;
   text-align: center;
   backface-visibility: hidden;
-}
-
-.face-front {
-  background-color: #4c5f57;
+  border-radius: 6px;
 }
 
 .face-back {
-  background-color: #149b5f;
   transform: rotateY(180deg);
+}
+
+.face-back img {
+  border-radius: 6px;
 }

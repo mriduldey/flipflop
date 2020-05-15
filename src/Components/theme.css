@@ -1,0 +1,101 @@
+:root {
+  /* cyan............................... */
+  --primary: #006c9a;
+  --secondary: #00bebe;
+  --light-tone: #00f3e4;
+  --lighter-tone: #9ff9c1;
+  --error-color: #00f3e4;
+}
+
+/* board styling */
+
+body {
+  background-color: var(--light-tone);
+}
+
+.status {
+  border-left: 20px solid var(--primary);
+  border-right: 5px solid var(--lightest-tone);
+  background-color: var(--secondary);
+  color: var(--lightest-tone);
+}
+
+.game-control button {
+  border: 2px solid var(--primary);
+  background-color: var(--light-tone);
+}
+
+.game-control button i {
+  color: var(--primary);
+}
+
+.settings {
+  color: var(--primary);
+}
+
+.settings:hover {
+  background-color: var(--light-tone);
+}
+
+.board-control {
+  border: 2px solid var(--primary);
+}
+
+.time-bar i {
+  color: var(--primary);
+}
+
+progress::-webkit-progress-bar {
+  background-color: var(--lightest-tone);
+  border: 2px solid var(--secondary);
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--primary);
+}
+
+.card-deck {
+  background-color: var(--lighter-tone);
+  border: 5px solid var(--secondary);
+}
+
+/* board styling end */
+
+/* ********************************************************************************************************* */
+
+/* single card styling */
+
+.scene {
+  border: 2px solid var(--primary);
+  background-color: var(--lighter-tone);
+}
+
+.scene.scene-error {
+  animation-name: error-card;
+  animation-duration: 200ms;
+  animation-iteration-count: 4;
+  animation-direction: alternate;
+}
+
+@keyframes error-card {
+  from {
+    border: 2px solid var(--primary);
+  }
+  to {
+    border: 2px solid var(--error-color);
+  }
+}
+
+.card-face {
+  color: white;
+}
+
+.face-front {
+  background-color: var(--primary);
+}
+
+.face-back {
+  background-color: #149b5f;
+}
+
+/* single card styling end */

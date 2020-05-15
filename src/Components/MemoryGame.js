@@ -1,6 +1,7 @@
 import React from "react";
 import CardDeck from "./CardDeck";
 import Dropdown from "./Dropdown";
+import "./theme.css";
 
 const actualCardFaces = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -27,6 +28,7 @@ const defaultRowNumber = 4;
 const defaultColNumber = 4;
 const cardNumberOptions = [3, 4, 5, 6];
 const defaultTimeRemaining = 120;
+const defaultTheme = "Cyan";
 
 const GAME_PRE_START = "GAME_PRE_START";
 const GAME_START_UNFLIPPED = "GAME_START_UNFLIPPED";
@@ -50,12 +52,16 @@ class MemoryGame extends React.Component {
       boardColOptions: cardNumberOptions,
       timeRemaining: defaultTimeRemaining,
       isSettingsOpened: false,
+      themeOptions: ["Blue", "Dark", "Bright", "Cyan", "Brick"],
+      currentTheme: defaultTheme,
     };
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    const { error, clickedCardIndex, gameStatus, currentTheme } = this.state;
+
     // for card flipping with click.........................
-    const { error, clickedCardIndex } = this.state;
+
     if (error) {
       const cardFaces = JSON.parse(JSON.stringify(this.state.viewFaces));
       cardFaces[clickedCardIndex].isFlipped = true;
@@ -67,7 +73,6 @@ class MemoryGame extends React.Component {
     //....................................................................
 
     //controlling game life cycle.........................................
-    const { gameStatus } = this.state;
     const { gameStatus: prevGameStatus } = prevState;
 
     console.log("current status: ", gameStatus);
@@ -122,6 +127,42 @@ class MemoryGame extends React.Component {
 
     if (gameStatus === GAME_END) {
       clearInterval(this.timeID);
+    }
+
+    // Theme update.....................................
+
+    let root = document.documentElement;
+
+    if (currentTheme === "Blue") {
+      root.style.setProperty("--primary", "#6b9080");
+      root.style.setProperty("--secondary", "#a4c3b2");
+      root.style.setProperty("--light-tone", "#eaf4f4");
+      root.style.setProperty("--lighter-tone", "#f6fff8");
+      root.style.setProperty("--error-color", "red");
+    } else if (currentTheme === "Dark") {
+      root.style.setProperty("--primary", "#0b0b0d");
+      root.style.setProperty("--secondary", "#474a56");
+      root.style.setProperty("--light-tone", "#929aab");
+      root.style.setProperty("--lighter-tone", "#d3d5fd");
+      root.style.setProperty("--error-color", "red");
+    } else if (currentTheme === "Bright") {
+      root.style.setProperty("--primary", "#f60c86");
+      root.style.setProperty("--secondary", "#11cbd7");
+      root.style.setProperty("--light-tone", "#9feed1");
+      root.style.setProperty("--lighter-tone", "#9feed1");
+      root.style.setProperty("--error-color", "#11cbd7");
+    } else if (currentTheme === "Cyan") {
+      root.style.setProperty("--primary", "#006c9a");
+      root.style.setProperty("--secondary", "#00bebe");
+      root.style.setProperty("--light-tone", "#00f3e4");
+      root.style.setProperty("--lighter-tone", "#9ff9c1");
+      root.style.setProperty("--error-color", "#00f3e4");
+    } else {
+      root.style.setProperty("--primary", "#031f41");
+      root.style.setProperty("--secondary", "#1b1b2f57");
+      root.style.setProperty("--light-tone", " #963041");
+      root.style.setProperty("--lighter-tone", "#1f4068");
+      root.style.setProperty("--error-color", "#d6475f");
     }
   }
 
@@ -316,6 +357,11 @@ class MemoryGame extends React.Component {
     return iconClass;
   };
 
+  handleTheme = (e) => {
+    const value = e.target.value;
+    this.setState(() => ({ currentTheme: value }));
+  };
+
   render() {
     const {
       rowNumber,
@@ -330,10 +376,14 @@ class MemoryGame extends React.Component {
       timeRemaining,
       gameStatus,
       isSettingsOpened,
+      themeOptions,
+      currentTheme,
     } = this.state;
     console.log("rendering");
     return (
-      <div className="memory-game-wrapper">
+      <div
+        className={`memory-game-wrapper ${currentTheme.toLocaleLowerCase()}-theme`}
+      >
         <div className="status">
           <div className="score">
             <ul className="life">{this.renderLifeList(life)}</ul>
@@ -374,14 +424,21 @@ class MemoryGame extends React.Component {
               value={colNumber}
               onChange={(e) => this.handleDropdown(e)}
             />
+            <Dropdown
+              label="Choose theme: "
+              name="theme"
+              options={themeOptions}
+              value={currentTheme}
+              onChange={(e) => this.handleTheme(e)}
+            />
           </div>
         </div>
         <div className="card-deck-wrapper">
           <div className="time-bar">
-            <p for="timebar">{`${
+            <p>{`${
               gameStatus === GAME_MIDDLE_FLIPPED ? `${timeRemaining}s` : ""
             }`}</p>
-            <i class={`${this.handleTimeIcon()}`}></i>
+            <i className={`${this.handleTimeIcon()}`}></i>
             <progress
               id="timebar"
               className={`${timeRemaining === 120 ? "time-full" : ""}`}
