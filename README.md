@@ -4,5 +4,5 @@ It is a card memory game built with React.js, where you can find
 2. You will see 5 lifes have been given if user has made a mistake. 
 3. Select the number of rows and columns on the board.
 4. A good UI.
-5. A time bar (yet to be implemented) to limit the time user has playing each board. 
+5. A time bar to limit the time user has playing each board. 
 6. Theme change options.
