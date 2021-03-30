@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/flipflop/static/css/main.1be28493.chunk.css",
-    "main.js": "/flipflop/static/js/main.1d184c1e.chunk.js",
-    "main.js.map": "/flipflop/static/js/main.1d184c1e.chunk.js.map",
+    "main.js": "/flipflop/static/js/main.1634f9c7.chunk.js",
+    "main.js.map": "/flipflop/static/js/main.1634f9c7.chunk.js.map",
     "runtime-main.js": "/flipflop/static/js/runtime-main.1c62d1a2.js",
     "runtime-main.js.map": "/flipflop/static/js/runtime-main.1c62d1a2.js.map",
     "static/js/2.7ed7d2ed.chunk.js": "/flipflop/static/js/2.7ed7d2ed.chunk.js",
     "static/js/2.7ed7d2ed.chunk.js.map": "/flipflop/static/js/2.7ed7d2ed.chunk.js.map",
     "index.html": "/flipflop/index.html",
-    "precache-manifest.7d76aab432623c7cebd8a6e11b449bb8.js": "/flipflop/precache-manifest.7d76aab432623c7cebd8a6e11b449bb8.js",
+    "precache-manifest.33936b65a0ede4ff9899f827d85e1f20.js": "/flipflop/precache-manifest.33936b65a0ede4ff9899f827d85e1f20.js",
     "service-worker.js": "/flipflop/service-worker.js",
     "static/css/main.1be28493.chunk.css.map": "/flipflop/static/css/main.1be28493.chunk.css.map",
     "static/js/2.7ed7d2ed.chunk.js.LICENSE.txt": "/flipflop/static/js/2.7ed7d2ed.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.1c62d1a2.js",
     "static/js/2.7ed7d2ed.chunk.js",
     "static/css/main.1be28493.chunk.css",
-    "static/js/main.1d184c1e.chunk.js"
+    "static/js/main.1634f9c7.chunk.js"
   ]
 }
