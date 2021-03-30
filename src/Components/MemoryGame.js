@@ -92,7 +92,7 @@ class MemoryGame extends React.Component {
             viewFaces: viewFaces,
             gameStatus: GAME_MIDDLE_FLIPPED,
           })),
-        1000
+        5000
       );
     }
 
