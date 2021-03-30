@@ -1,4 +1,4 @@
-# card-memory-game-with-react-js
+# Flip-flip with React.js
 It is a card memory game built with React.js, where you can find
 1. The main feature, a game life cycle, from initial state -> start -> middle or playing state -> end state and again back to 'start' if user wants. 
 2. You will see 5 lifes have been given if user has made a mistake. 
