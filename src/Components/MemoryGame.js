@@ -15,7 +15,7 @@ viewFaces = viewFaces.map((element, index) => {
   };
 });
 
-const shuffle = (array) => {
+const shuffle = array => {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
@@ -82,7 +82,7 @@ class MemoryGame extends React.Component {
       console.log("game status: ", GAME_START_UNFLIPPED);
       let viewFaces = JSON.parse(JSON.stringify(this.state.viewFaces));
 
-      viewFaces.forEach((viewFace) => {
+      viewFaces.forEach(viewFace => {
         viewFace.isFlipped = true;
       });
 
@@ -174,13 +174,13 @@ class MemoryGame extends React.Component {
     }));
   };
 
-  handleClick = (i) => {
+  handleClick = i => {
     const cardFaces = JSON.parse(JSON.stringify(this.state.viewFaces));
     const cardFace = cardFaces[i];
     const { flippedForMatch, gameStatus, life } = this.state;
     if (gameStatus === GAME_MIDDLE_FLIPPED) {
       if (flippedForMatch && cardFace.isFlipped) {
-        const cardFaceMatched = cardFaces.find((card) => {
+        const cardFaceMatched = cardFaces.find(card => {
           if (
             card.id !== cardFace.id &&
             !card.isFlipped &&
@@ -232,7 +232,7 @@ class MemoryGame extends React.Component {
     const { gameStatus } = this.state;
     if (gameStatus === GAME_PRE_START || gameStatus === GAME_END) {
       let viewFaces = JSON.parse(JSON.stringify(this.state.viewFaces));
-      viewFaces.forEach((viewFace) => {
+      viewFaces.forEach(viewFace => {
         viewFace.isFlipped = false;
       });
 
@@ -262,11 +262,11 @@ class MemoryGame extends React.Component {
       : "Game over! play again?";
   };
 
-  renderLifeList = (life) => {
+  renderLifeList = life => {
     let lifeArray = [];
     for (let i = 0; i < life; i += 1) {
       lifeArray.push(
-        <li key={i}>
+        <li className="px-2" key={i}>
           <i className="far fa-heart"></i>
         </li>
       );
@@ -275,7 +275,7 @@ class MemoryGame extends React.Component {
     return lifeArray;
   };
 
-  handleDropdown = (e) => {
+  handleDropdown = e => {
     const {
       rowNumber,
       colNumber,
@@ -310,7 +310,7 @@ class MemoryGame extends React.Component {
         };
       });
 
-      const shuffle = (array) => {
+      const shuffle = array => {
         for (let i = array.length - 1; i > 0; i--) {
           let j = Math.floor(Math.random() * (i + 1));
           [array[i], array[j]] = [array[j], array[i]];
@@ -320,13 +320,13 @@ class MemoryGame extends React.Component {
       shuffle(viewFaces);
 
       let newBoardColOptions = isRowChange
-        ? cardNumberOptions.filter((col) => {
+        ? cardNumberOptions.filter(col => {
             return value % 2 === 0 ? true : col % 2 === 0 ? true : false;
           })
         : boardColOptions;
 
       let newBoardRowOptions = !isRowChange
-        ? cardNumberOptions.filter((col) => {
+        ? cardNumberOptions.filter(col => {
             return value % 2 === 0 ? true : col % 2 === 0 ? true : false;
           })
         : boardRowOptions;
@@ -342,8 +342,8 @@ class MemoryGame extends React.Component {
   };
 
   handleSettings = () => {
-    const { isSettingsOpened } = this.state;
-    this.setState(() => ({ isSettingsOpened: !isSettingsOpened }));
+    // const { isSettingsOpened } = this.state;
+    // this.setState(() => ({ isSettingsOpened: !isSettingsOpened }));
   };
 
   handleTimeIcon = () => {
@@ -357,7 +357,7 @@ class MemoryGame extends React.Component {
     return iconClass;
   };
 
-  handleTheme = (e) => {
+  handleTheme = e => {
     const value = e.target.value;
     this.setState(() => ({ currentTheme: value }));
   };
@@ -382,14 +382,11 @@ class MemoryGame extends React.Component {
     console.log("rendering");
     return (
       <div
-        className={`memory-game-wrapper ${currentTheme.toLocaleLowerCase()}-theme`}
+        className={`memory-game-wrapper ${currentTheme.toLocaleLowerCase()}-theme d-flex flex-column flex-md-row vh-100`}
       >
-        <div className="status">
-          <div className="score">
-            <ul className="life">{this.renderLifeList(life)}</ul>
-          </div>
-          <div className="game-control">
-            <p>{this.gameStatusInfo()}</p>
+        <div className="status d-flex flex-md-column justify-content-between align-items-center justify-content-md-between align-items-md-center p-3">
+          <div className="game-control d-flex flex-column justify-content-center align-items-center">
+            <p className="mb-1">{this.gameStatusInfo()}</p>
             <button type="submit" onClick={() => this.handleGameControl()}>
               <i className="fas fa-play"></i>
             </button>
@@ -402,58 +399,94 @@ class MemoryGame extends React.Component {
               /*10 points for each matching pait, -5 points for each error*/
             }
           </p>
-          <div className="settings" onClick={() => this.handleSettings()}>
+          <div className="settings" data-bs-toggle="modal" data-bs-target="#settings-modal" onClick={() => this.handleSettings()}>
             <i className="fas fa-cog"></i>
           </div>
-          <div
-            className={`board-control ${
-              isSettingsOpened ? "settings-opened" : "settings-closed"
-            }`}
-          >
-            <Dropdown
-              label="Pick row number: "
-              name="row-options"
-              options={boardRowOptions}
-              value={rowNumber}
-              onChange={(e) => this.handleDropdown(e)}
-            />
-            <Dropdown
-              label="Pick column number: "
-              name="col-options"
-              options={boardColOptions}
-              value={colNumber}
-              onChange={(e) => this.handleDropdown(e)}
-            />
-            <Dropdown
-              label="Choose theme: "
-              name="theme"
-              options={themeOptions}
-              value={currentTheme}
-              onChange={(e) => this.handleTheme(e)}
-            />
+        </div>
+        <div className="card-deck-wrapper container d-flex flex-column align-items-center w-100 mt-5">
+          <div className="time-bar row mb-3">
+            <div className="col">
+              <i className={`${this.handleTimeIcon()}`}></i>
+            </div>
+            <div className="col position-relative d-flex align-items-center">
+              <span className="mb-0 position-absolute top-0 translate-top">{`${
+                gameStatus === GAME_MIDDLE_FLIPPED ? `${timeRemaining}s` : " "
+              }`}</span>
+              <progress
+                id="timebar"
+                className={`${timeRemaining === 120 ? "time-full" : ""}`}
+                value={timeRemaining}
+                max="120"
+              ></progress>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <CardDeck
+                rowNumber={rowNumber}
+                colNumber={colNumber}
+                onClick={i => this.handleClick(i)}
+                viewFaces={viewFaces}
+                error={error}
+                selectedCardIndex={clickedCardIndex}
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <div className="score">
+                <ul className="life-list list-unstyled d-flex py-3">
+                  {this.renderLifeList(life)}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="card-deck-wrapper">
-          <div className="time-bar">
-            <p>{`${
-              gameStatus === GAME_MIDDLE_FLIPPED ? `${timeRemaining}s` : ""
-            }`}</p>
-            <i className={`${this.handleTimeIcon()}`}></i>
-            <progress
-              id="timebar"
-              className={`${timeRemaining === 120 ? "time-full" : ""}`}
-              value={timeRemaining}
-              max="120"
-            ></progress>
+
+        <div class="modal" id="settings-modal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div
+                  // className={`board-control ${
+                  //   isSettingsOpened ? "settings-opened" : "settings-closed"
+                  // }`}
+                  className="board-control"
+                >
+                  <Dropdown
+                    label="Pick row number: "
+                    name="row-options"
+                    options={boardRowOptions}
+                    value={rowNumber}
+                    onChange={e => this.handleDropdown(e)}
+                  />
+                  <Dropdown
+                    label="Pick column number: "
+                    name="col-options"
+                    options={boardColOptions}
+                    value={colNumber}
+                    onChange={e => this.handleDropdown(e)}
+                  />
+                  <Dropdown
+                    label="Choose theme: "
+                    name="theme"
+                    options={themeOptions}
+                    value={currentTheme}
+                    onChange={e => this.handleTheme(e)}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-          <CardDeck
-            rowNumber={rowNumber}
-            colNumber={colNumber}
-            onClick={(i) => this.handleClick(i)}
-            viewFaces={viewFaces}
-            error={error}
-            selectedCardIndex={clickedCardIndex}
-          />
         </div>
       </div>
     );

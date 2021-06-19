@@ -4,71 +4,56 @@ body {
   font-family: "Lato", sans-serif;
 }
 
-.memory-game-wrapper {
-  display: flex;
-  flex-direction: row;
-  padding-left: 50px;
+.translate-top {
+  transform: translateY(-100%);
 }
 
-.status {
-  position: relative;
-  height: calc(100vh - 40px);
-  width: 300px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
+@media (min-width: 768px) {
+  .status {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+  }
+
+  .status .score {
+    height: 40px;
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  .status .game-control {
+    height: 150px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+
+  .game-control p {
+    margin: auto;
+  }
+
+  .game-control button {
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 10px;
+  }
+
+  .game-control button:focus {
+    outline: 0px;
+  }
+
+  .game-control button i {
+    font-size: 90px;
+  }
+
+  .game-control button:focus i {
+    font-size: 85px;
+  }
 }
 
-.status .score {
-  height: 40px;
-  width: 100%;
-  margin-bottom: 25px;
-}
-
-.life {
-  list-style: none;
-  text-align: center;
-  margin: 0px;
-  padding: 0px;
-  height: 50px;
-}
-
-.life li {
-  display: inline-block;
-  padding: 5px;
-}
-
-.life li i {
+.life-list li i {
   font-size: 30px;
-}
-
-.status .game-control {
-  height: 150px;
-  width: 100%;
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.game-control p {
-  margin: auto;
-}
-
-.game-control button {
-  padding: 10px;
-  border-radius: 6px;
-  margin-top: 10px;
-}
-
-.game-control button:focus {
-  outline: 0px;
-}
-
-.game-control button i {
-  font-size: 90px;
-}
-
-.game-control button:focus i {
-  font-size: 85px;
 }
 
 .point {
@@ -76,12 +61,8 @@ body {
 }
 
 .settings {
-  display: inline-block;
-  position: absolute;
   border: 1px solid #6b9080;
   border-radius: 50%;
-  bottom: 10px;
-  left: 10px;
   padding: 4px 4px 2px;
 }
 
@@ -105,31 +86,6 @@ body {
   display: none;
 }
 
-.card-deck-wrapper {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.time-bar {
-  height: 30px;
-  position: relative;
-}
-
-.time-bar p {
-  margin: auto;
-  position: absolute;
-  left: 25px;
-}
-
-.time-bar i {
-  margin-right: 10px;
-  transform: translateY(3px);
-}
-
 .time-bar i.game-started {
   animation: rotate-icon 3s linear 0s infinite normal;
 }
@@ -149,10 +105,7 @@ body {
 progress {
   -webkit-appearance: none;
   appearance: none;
-
-  height: 16px;
-  width: 800px;
-  margin-top: 25px;
+  width: 50vw;
 }
 
 progress::-webkit-progress-bar {

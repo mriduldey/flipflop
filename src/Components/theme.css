@@ -14,7 +14,7 @@ body {
 }
 
 .status {
-  border-left: 20px solid var(--primary);
+  /* border-left: 20px solid var(--primary); */
   border-right: 5px solid var(--lightest-tone);
   background-color: var(--secondary);
   color: var(--lightest-tone);
