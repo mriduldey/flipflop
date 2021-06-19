@@ -179,10 +179,3 @@ progress.time-full::-webkit-progress-value {
   margin: auto;
   padding: 20px;
 }
-
-.card-deck-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
