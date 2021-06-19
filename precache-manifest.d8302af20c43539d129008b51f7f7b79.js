@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a9ae81ea695d23eb79c620e09687da95",
+    "revision": "26992743b4aa32e98d7cacd18e31c2b3",
     "url": "/flipflop/index.html"
   },
   {
-    "revision": "222539a5f1d02bc0d0f8",
-    "url": "/flipflop/static/css/main.1be28493.chunk.css"
+    "revision": "3366159a039f0b5649bb",
+    "url": "/flipflop/static/css/main.5cb9c762.chunk.css"
   },
   {
     "revision": "08b40ada0e79ccdd34ad",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/flipflop/static/js/2.7ed7d2ed.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "222539a5f1d02bc0d0f8",
-    "url": "/flipflop/static/js/main.1634f9c7.chunk.js"
+    "revision": "3366159a039f0b5649bb",
+    "url": "/flipflop/static/js/main.0abfc44f.chunk.js"
   },
   {
     "revision": "290aa50eac2f28bc3a2d",
