@@ -1,6 +1,6 @@
 import React from "react";
 import CardDeck from "./CardDeck";
-import Dropdown from "./Dropdown";
+import SettingsModal from "./SettingsModal";
 import "./theme.css";
 
 const actualCardFaces = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -36,26 +36,22 @@ const GAME_MIDDLE_FLIPPED = "GAME_MIDDLE_FLIPPED";
 const GAME_END = "GAME_END";
 
 class MemoryGame extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      viewFaces: viewFaces,
-      rowNumber: defaultRowNumber,
-      colNumber: defaultColNumber,
-      flippedForMatch: false,
-      clickedCardIndex: undefined,
-      pairMatched: 0,
-      error: false,
-      life: 5,
-      gameStatus: GAME_PRE_START,
-      boardRowOptions: cardNumberOptions,
-      boardColOptions: cardNumberOptions,
-      timeRemaining: defaultTimeRemaining,
-      isSettingsOpened: false,
-      themeOptions: ["Blue", "Dark", "Bright", "Cyan", "Brick"],
-      currentTheme: defaultTheme,
-    };
-  }
+  state = {
+    viewFaces: viewFaces,
+    rowNumber: defaultRowNumber,
+    colNumber: defaultColNumber,
+    flippedForMatch: false,
+    clickedCardIndex: undefined,
+    pairMatched: 0,
+    error: false,
+    life: 5,
+    gameStatus: GAME_PRE_START,
+    boardRowOptions: cardNumberOptions,
+    boardColOptions: cardNumberOptions,
+    timeRemaining: defaultTimeRemaining,
+    themeOptions: ["Blue", "Dark", "Bright", "Cyan", "Brick"],
+    currentTheme: defaultTheme,
+  };
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { error, clickedCardIndex, gameStatus, currentTheme } = this.state;
@@ -341,11 +337,6 @@ class MemoryGame extends React.Component {
     }
   };
 
-  handleSettings = () => {
-    // const { isSettingsOpened } = this.state;
-    // this.setState(() => ({ isSettingsOpened: !isSettingsOpened }));
-  };
-
   handleTimeIcon = () => {
     const { gameStatus } = this.state;
     const iconClass =
@@ -375,7 +366,6 @@ class MemoryGame extends React.Component {
       boardRowOptions,
       timeRemaining,
       gameStatus,
-      isSettingsOpened,
       themeOptions,
       currentTheme,
     } = this.state;
@@ -399,7 +389,11 @@ class MemoryGame extends React.Component {
               /*10 points for each matching pait, -5 points for each error*/
             }
           </p>
-          <div className="settings" data-bs-toggle="modal" data-bs-target="#settings-modal" onClick={() => this.handleSettings()}>
+          <div
+            className="settings"
+            data-bs-toggle="modal"
+            data-bs-target="#settings-modal"
+          >
             <i className="fas fa-cog"></i>
           </div>
         </div>
@@ -442,52 +436,16 @@ class MemoryGame extends React.Component {
             </div>
           </div>
         </div>
-
-        <div class="modal" id="settings-modal" tabindex="-1">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <div
-                  // className={`board-control ${
-                  //   isSettingsOpened ? "settings-opened" : "settings-closed"
-                  // }`}
-                  className="board-control"
-                >
-                  <Dropdown
-                    label="Pick row number: "
-                    name="row-options"
-                    options={boardRowOptions}
-                    value={rowNumber}
-                    onChange={e => this.handleDropdown(e)}
-                  />
-                  <Dropdown
-                    label="Pick column number: "
-                    name="col-options"
-                    options={boardColOptions}
-                    value={colNumber}
-                    onChange={e => this.handleDropdown(e)}
-                  />
-                  <Dropdown
-                    label="Choose theme: "
-                    name="theme"
-                    options={themeOptions}
-                    value={currentTheme}
-                    onChange={e => this.handleTheme(e)}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <SettingsModal
+          handleDropdown={this.handleDropdown}
+          handleTheme={this.handleTheme}
+          boardRowOptions={boardRowOptions}
+          rowNumber={rowNumber}
+          boardColOptions={boardColOptions}
+          colNumber={colNumber}
+          themeOptions={themeOptions}
+          currentTheme={currentTheme}
+        />
       </div>
     );
   }

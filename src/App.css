@@ -77,15 +77,6 @@ body {
   border-radius: 6px;
 }
 
-.settings-opened {
-  display: flex;
-  flex-direction: column;
-}
-
-.settings-closed {
-  display: none;
-}
-
 .time-bar i.game-started {
   animation: rotate-icon 3s linear 0s infinite normal;
 }
