@@ -1,5 +1,6 @@
 import React from "react";
 import CardDeck from "./CardDeck";
+import Timebar from "./TimeBar";
 import SettingsModal from "./SettingsModal";
 import "./theme.css";
 
@@ -27,7 +28,7 @@ shuffle(viewFaces);
 const defaultRowNumber = 4;
 const defaultColNumber = 4;
 const cardNumberOptions = [3, 4, 5, 6];
-const defaultTimeRemaining = 120;
+const defaultTimeRemaining = 100;
 const defaultTheme = "Cyan";
 
 const GAME_PRE_START = "GAME_PRE_START";
@@ -398,22 +399,14 @@ class MemoryGame extends React.Component {
           </div>
         </div>
         <div className="card-deck-wrapper container d-flex flex-column align-items-center w-100 mt-5">
-          <div className="time-bar row mb-3">
-            <div className="col">
-              <i className={`${this.handleTimeIcon()}`}></i>
-            </div>
-            <div className="col position-relative d-flex align-items-center">
-              <span className="mb-0 position-absolute top-0 translate-top">{`${
-                gameStatus === GAME_MIDDLE_FLIPPED ? `${timeRemaining}s` : " "
-              }`}</span>
-              <progress
-                id="timebar"
-                className={`${timeRemaining === 120 ? "time-full" : ""}`}
-                value={timeRemaining}
-                max="120"
-              ></progress>
-            </div>
-          </div>
+          <Timebar
+            handleTimeIcon={this.handleTimeIcon}
+            timeRemainingString={
+              gameStatus === GAME_MIDDLE_FLIPPED ? `${timeRemaining}s` : ""
+            }
+            timeRemaining={timeRemaining}
+            maxTime={defaultTimeRemaining}
+          />
           <div className="row">
             <div className="col">
               <CardDeck
