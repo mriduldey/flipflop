@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/flipflop/static/css/main.26d0f9f0.chunk.css",
+    "main.css": "/flipflop/static/css/main.f0233c44.chunk.css",
     "main.js": "/flipflop/static/js/main.e2683399.chunk.js",
     "main.js.map": "/flipflop/static/js/main.e2683399.chunk.js.map",
     "runtime-main.js": "/flipflop/static/js/runtime-main.1c62d1a2.js",
@@ -8,16 +8,16 @@
     "static/js/2.7ed7d2ed.chunk.js": "/flipflop/static/js/2.7ed7d2ed.chunk.js",
     "static/js/2.7ed7d2ed.chunk.js.map": "/flipflop/static/js/2.7ed7d2ed.chunk.js.map",
     "index.html": "/flipflop/index.html",
-    "precache-manifest.f4a9ab4ec9607eecb20a3b356f5596d1.js": "/flipflop/precache-manifest.f4a9ab4ec9607eecb20a3b356f5596d1.js",
+    "precache-manifest.3d8fd6d175d408135e51eac7303785ec.js": "/flipflop/precache-manifest.3d8fd6d175d408135e51eac7303785ec.js",
     "service-worker.js": "/flipflop/service-worker.js",
-    "static/css/main.26d0f9f0.chunk.css.map": "/flipflop/static/css/main.26d0f9f0.chunk.css.map",
+    "static/css/main.f0233c44.chunk.css.map": "/flipflop/static/css/main.f0233c44.chunk.css.map",
     "static/js/2.7ed7d2ed.chunk.js.LICENSE.txt": "/flipflop/static/js/2.7ed7d2ed.chunk.js.LICENSE.txt",
     "static/media/batman.png": "/flipflop/static/media/batman.bd83c4a2.png"
   },
   "entrypoints": [
     "static/js/runtime-main.1c62d1a2.js",
     "static/js/2.7ed7d2ed.chunk.js",
-    "static/css/main.26d0f9f0.chunk.css",
+    "static/css/main.f0233c44.chunk.css",
     "static/js/main.e2683399.chunk.js"
   ]
 }
