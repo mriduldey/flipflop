@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/flipflop/static/css/main.5cb9c762.chunk.css",
-    "main.js": "/flipflop/static/js/main.0abfc44f.chunk.js",
-    "main.js.map": "/flipflop/static/js/main.0abfc44f.chunk.js.map",
+    "main.css": "/flipflop/static/css/main.26d0f9f0.chunk.css",
+    "main.js": "/flipflop/static/js/main.e2683399.chunk.js",
+    "main.js.map": "/flipflop/static/js/main.e2683399.chunk.js.map",
     "runtime-main.js": "/flipflop/static/js/runtime-main.1c62d1a2.js",
     "runtime-main.js.map": "/flipflop/static/js/runtime-main.1c62d1a2.js.map",
     "static/js/2.7ed7d2ed.chunk.js": "/flipflop/static/js/2.7ed7d2ed.chunk.js",
     "static/js/2.7ed7d2ed.chunk.js.map": "/flipflop/static/js/2.7ed7d2ed.chunk.js.map",
     "index.html": "/flipflop/index.html",
-    "precache-manifest.d8302af20c43539d129008b51f7f7b79.js": "/flipflop/precache-manifest.d8302af20c43539d129008b51f7f7b79.js",
+    "precache-manifest.f4a9ab4ec9607eecb20a3b356f5596d1.js": "/flipflop/precache-manifest.f4a9ab4ec9607eecb20a3b356f5596d1.js",
     "service-worker.js": "/flipflop/service-worker.js",
-    "static/css/main.5cb9c762.chunk.css.map": "/flipflop/static/css/main.5cb9c762.chunk.css.map",
+    "static/css/main.26d0f9f0.chunk.css.map": "/flipflop/static/css/main.26d0f9f0.chunk.css.map",
     "static/js/2.7ed7d2ed.chunk.js.LICENSE.txt": "/flipflop/static/js/2.7ed7d2ed.chunk.js.LICENSE.txt",
     "static/media/batman.png": "/flipflop/static/media/batman.bd83c4a2.png"
   },
   "entrypoints": [
     "static/js/runtime-main.1c62d1a2.js",
     "static/js/2.7ed7d2ed.chunk.js",
-    "static/css/main.5cb9c762.chunk.css",
-    "static/js/main.0abfc44f.chunk.js"
+    "static/css/main.26d0f9f0.chunk.css",
+    "static/js/main.e2683399.chunk.js"
   ]
 }

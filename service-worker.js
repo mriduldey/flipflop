@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/flipflop/precache-manifest.d8302af20c43539d129008b51f7f7b79.js"
+  "/flipflop/precache-manifest.f4a9ab4ec9607eecb20a3b356f5596d1.js"
 );
 
 self.addEventListener('message', (event) => {
