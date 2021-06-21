@@ -31,11 +31,11 @@ body {
 
 .settings {
   color: var(--primary);
-}
-
-.settings:hover {
   background-color: var(--light-tone);
 }
+
+/* .settings:hover { //need future update
+} */
 
 .board-control {
   border: 2px solid var(--primary);
@@ -57,6 +57,10 @@ progress::-webkit-progress-value {
 .card-deck {
   background-color: var(--lighter-tone);
   border: 5px solid var(--secondary);
+}
+
+.life-list {
+  color: var(--primary);
 }
 
 /* board styling end */
