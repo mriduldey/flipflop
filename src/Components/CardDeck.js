@@ -47,7 +47,9 @@ const CardDeck = ({
   };
 
   return (
-    <div className={`card-deck card-deck-${rowNumber}-${colNumber}`}>
+    <div
+      className={`card-deck card-deck-${rowNumber}-${colNumber} d-flex flex-column align-items-center justify-content-center rounded-3 p-2`}
+    >
       {createCardDeck()}
     </div>
   );

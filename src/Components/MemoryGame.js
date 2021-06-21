@@ -1,7 +1,9 @@
 import React from "react";
 import CardDeck from "./CardDeck";
 import Timebar from "./TimeBar";
+import GameControlbar from "./GameControlBar";
 import SettingsModal from "./SettingsModal";
+
 import "./theme.css";
 
 const actualCardFaces = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -153,7 +155,7 @@ class MemoryGame extends React.Component {
       root.style.setProperty("--secondary", "#00bebe");
       root.style.setProperty("--light-tone", "#00f3e4");
       root.style.setProperty("--lighter-tone", "#9ff9c1");
-      root.style.setProperty("--error-color", "#00f3e4");
+      root.style.setProperty("--error-color", "red");
     } else {
       root.style.setProperty("--primary", "#031f41");
       root.style.setProperty("--secondary", "#1b1b2f57");
@@ -375,29 +377,12 @@ class MemoryGame extends React.Component {
       <div
         className={`memory-game-wrapper ${currentTheme.toLocaleLowerCase()}-theme d-flex flex-column flex-md-row vh-100`}
       >
-        <div className="status d-flex flex-md-column justify-content-between align-items-center justify-content-md-between align-items-md-center p-3">
-          <div className="game-control d-flex flex-column justify-content-center align-items-center">
-            <p className="mb-1">{this.gameStatusInfo()}</p>
-            <button type="submit" onClick={() => this.handleGameControl()}>
-              <i className="fas fa-play"></i>
-            </button>
-          </div>
-
-          <p className="point">
-            Point:{" "}
-            {
-              pairMatched * 10 - (5 - life) * 5
-              /*10 points for each matching pait, -5 points for each error*/
-            }
-          </p>
-          <div
-            className="settings"
-            data-bs-toggle="modal"
-            data-bs-target="#settings-modal"
-          >
-            <i className="fas fa-cog"></i>
-          </div>
-        </div>
+        <GameControlbar
+          gameStatusInfo={this.gameStatusInfo}
+          handleGameControl={this.handleGameControl}
+          pairMatched={pairMatched}
+          life={life}
+        />
         <div className="card-deck-wrapper container d-flex flex-column align-items-center w-100 mt-5">
           <Timebar
             handleTimeIcon={this.handleTimeIcon}

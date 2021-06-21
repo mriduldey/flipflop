@@ -1,18 +1,12 @@
 .scene {
-  height: 62px;
-  width: 52px;
+  height: 52px;
+  width: 42px;
   perspective: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  margin: 10px;
 }
 
 .card {
-  height: 57px;
-  width: 47px;
-  position: relative;
+  height: 48px;
+  width: 38px;
   transition: transform 800ms;
   transform-style: preserve-3d;
   cursor: pointer;
@@ -23,16 +17,10 @@
 }
 
 .card-face {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  border-radius: 6px;
   font-size: 15px;
   font-weight: 600;
-  line-height: 55px;
-  text-align: center;
+  line-height: 42px;
   backface-visibility: hidden;
-  border-radius: 6px;
 }
 
 .face-back {
@@ -40,5 +28,6 @@
 }
 
 .face-back img {
-  border-radius: 6px;
+  height: 46px;
+  width: 36px;
 }
